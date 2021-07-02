@@ -1,4 +1,3 @@
-
 # from chap2 import  exp2_8 as quickSort
 # import math
 # L=quickSort.input_L
@@ -51,3 +50,78 @@
 #     # res=res+quickSort.quickSort(L[left+g*5:left+(g+1)*5])[math.ceil((min(right,left+(g+1)*5)-left*g)/5)]
 #
 #     # print('res=>',res)
+
+from chap2 import exp2_8 as quicksort, base
+import math
+from chap2 import bubleSort
+
+
+def mediaPartition(L, left, right, media):
+    '''将L按meidia进行划分,左边小于media,右边大于media,并返回划分后media的位置'''
+    while left < right:
+        if L[right] > media:
+            right -= 1
+        elif L[right] < media:
+            tmp = L[left]
+            L[left] = L[right]
+            L[right] = tmp
+            left += 1
+        elif L[left] < media:
+            left += 1
+        elif L[left] >= media:
+            tmp = L[right]
+            L[right] = L[left]
+            L[left] = tmp
+            right -= 1
+
+    return left
+
+
+# print(base.CONST_L)
+# print(mediaPartition(base.CONST_L,0,len(base.CONST_L)-1,13))
+def linerSearche(L, left, right, k):
+    '''
+    寻找L中第k小元素
+    :param L: 输入列表
+    :param left: 起始位置
+    :param right: 结束位置
+    :param k: 第k小
+    :return: 第k小元素
+    '''
+    if right - left < 3:
+        '''对于长度小于75的列表，直接排序，输出其中的第k小元素即可'''
+        L[left:right] = bubleSort.buble(L[left:right])
+        # print(L)
+        print('left,', left, 'right,', right, L[left:right])
+        return L[left + k - 1]
+    else:
+        groups = math.ceil((right - left) / 5)
+        # print(groups)
+        for g in range(groups):
+            # print('g=>',g,'g l=>',L[left+5*g:left+5*(g+1)])
+            L[left + 5 * g:left + 5 * (g + 1)] = bubleSort.buble(L[left + 5 * g:left + 5 * (g + 1)])
+            # print('g=>', g, 'g l=>', L[left + 5 * g:left + 5 * (g + 1)])
+            tmp = L[left + 5 * g + (min(right, left + (g + 1) * 5) - left - 5 * g) // 2]
+            L[left + 5 * g + (min(right, left + (g + 1) * 5) - left - 5 * g) // 2] = L[left + g]
+            L[left + g] = tmp
+        print('left',left,'groups',groups,'media_media',groups//2,'L',L)
+        media = linerSearche(L, left, left+groups, groups // 2)
+        print(media)
+        media_pos = mediaPartition(L, left, right, media)  ###对L进行，找到中位数的中位数位置，并划分
+        print(media_pos)
+        if media_pos - left + 1 <= k:
+            return linerSearche(L, left, media_pos, k)
+        else:
+            return linerSearche(L, media_pos + 1, right, k - media_pos)
+        # print(L)
+        # return L
+        # print(L)
+
+
+# print(quicksort.quickSort(base.CONST_L))
+# print(quicksort.quickSort())
+# print(quicksort.quickSort(base.CONST_L))
+
+x=linerSearche([13, 16, 9, 19, 15, 18, 18, 14, 13, 20,35,100], 0, right=11, k=1)
+print('*******')
+print(x)
