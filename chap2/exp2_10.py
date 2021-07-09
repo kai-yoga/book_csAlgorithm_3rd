@@ -16,13 +16,15 @@ in P2 's distance border_min_d
 import math
 
 
-
 class Point:
     def __init__(self, x, y):
         self._x, self._y = x, y
 
-    def __eq__(self, other):
-        return self._x == other._x and self._y == other._y
+    # def __eq__(self, other):
+    #     return self._x == other._x and self._y == other._y
+
+    def __le__(self, other):
+        return self._y < other._y
 
     def getDistance(self, other):
         '''返回两点之间的欧式距离'''
