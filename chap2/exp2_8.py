@@ -40,13 +40,6 @@ def quickSort(L):
         res = swap(L=L, value=L[index], left=0, right=len(L) - 1)
         L = res[0]
         left = res[1]
-        # tmp=L[left]
-        # L[left]=value
-        # L[0]=tmp
-        # print('sort once:',L)
-        # print('left',L[:left])
-        # print('mid',L[left:left+1])
-        # print('right',L[left+1:])
         return quickSort(L[:left]) + L[left:left + 1] + quickSort(L[left + 1:])
     else:###递归出口，只有一个元素时
         return L
