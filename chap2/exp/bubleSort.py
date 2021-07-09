@@ -1,5 +1,3 @@
-from chap2 import base
-
 def buble(L):
     len_L=len(L)
     for i in range(len_L):

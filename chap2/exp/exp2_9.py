@@ -1,8 +1,5 @@
-
-
-from chap2 import exp2_8 as quicksort, base
 import math
-from chap2 import bubleSort
+from chap2.exp import bubleSort
 
 
 def mediaPartition(L, media):
