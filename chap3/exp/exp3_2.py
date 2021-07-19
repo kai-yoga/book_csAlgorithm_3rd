@@ -28,8 +28,14 @@ def searchAll(A):
         return sum, best_i, best_j
 
 
-def partitionSearch(A):
+def partitionSearch(A,left,right):
     '''分治算法'''
     pass
+    sum=0
+    if left==right:
+        sum=A[left] if A[left]>0 else 0
+    else:
+        mid=(left+right)//2
+
 
 
