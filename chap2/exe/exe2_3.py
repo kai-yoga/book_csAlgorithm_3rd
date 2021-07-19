@@ -19,8 +19,8 @@ def extendBinarySearch(L, x):
         left, right = 0, len(L) - 1
         while left <= right:
             mid = (left + right) // 2
-            print(left,right)
-            if L[mid] == x :
+            print(left, right)
+            if L[mid] == x:
                 return {
                     "left": mid,
                     "right": mid
@@ -28,11 +28,11 @@ def extendBinarySearch(L, x):
             elif L[mid] < x and L[mid + 1] > x:
                 return {
                     "left": mid,
-                    "right": mid+1
+                    "right": mid + 1
                 }
             elif L[mid] > x and L[mid - 1] < x:
                 return {
-                    "left": mid-1,
+                    "left": mid - 1,
                     "right": mid
                 }
             elif L[mid] < x:
@@ -42,4 +42,4 @@ def extendBinarySearch(L, x):
 
 
 L = [1, 2, 3, 4, 5, 6]
-print(extendBinarySearch(L,1.5))
+print(extendBinarySearch(L, 1.5))
